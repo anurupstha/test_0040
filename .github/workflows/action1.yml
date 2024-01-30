@@ -10,11 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     environment: BETA
     steps:
-      - shell: bash
-        name: Main Script
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
         env:
           APP_BASE_PATH: ${{ vars.APP_BASE_PATH }}
-          LOG_KEY_ID: ${{ secrets.LOG_KEY_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: terraform plan
+
+      - shell: bash
+        name: Main Script
         run: |
           echo "Base Path: $APP_BASE_PATH"
-          echo "Log Key Id: $LOG_KEY_ID with length ${#LOG_KEY_ID}"
+          terraform apply -auto-approve
+      
