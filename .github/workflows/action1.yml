@@ -1,0 +1,19 @@
+name: "Action 1 Build"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        name: Main Script
+        env:
+          APP_BASE_PATH: ${{ env.APP_BASE_PATH }}
+          LOG_KEY_ID: ${{ secrets.LOG_KEY_ID }}
+        run: |
+          echo Base Path: $APP_BASE_PATH
+          echo Log Key Id: $LOG_KEY_ID  
