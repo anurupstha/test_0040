@@ -24,14 +24,15 @@ jobs:
 
       - name: Terraform Plan
         env:
-          APP_BASE_PATH: ${{ vars.APP_BASE_PATH }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: terraform plan
 
       - shell: bash
         name: Main Script
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          echo "Base Path: $APP_BASE_PATH"
           terraform apply -auto-approve
       
