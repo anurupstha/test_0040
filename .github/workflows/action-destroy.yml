@@ -1,4 +1,4 @@
-name: "Action 1 Build"
+name: "Action Destroy"
 
 on: workflow_dispatch
 
