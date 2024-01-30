@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: BETA
     steps:
       - shell: bash
         name: Main Script
