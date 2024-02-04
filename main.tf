@@ -29,13 +29,3 @@ resource "aws_instance" "myec2" {
     Name = "myec2"
   }
 }
-#Terraform state locking using DynamoDB and S3 bucket
-
-terraform {
-  backend "s3" {
-    bucket = "terraform-state-github-actions"
-    key    = "githubactions/project-demo/terraform.tfstate"
-    region = "us-east-1"
-    dynamodb_table = "terraform-state-locking-github"
-  }
-}
