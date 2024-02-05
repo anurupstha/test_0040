@@ -30,13 +30,6 @@ resource "aws_instance" "myec2" {
   }
 }
 
-# Create a key pair
-
-resource "aws_key_pair" "mykey" {
-  key_name   = "server"
-  public_key = file("~/.ssh/id_rsa.pub")
-}
-
 #Terraform state locking using DynamoDB and S3 bucket
 
 terraform {
